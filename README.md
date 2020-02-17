@@ -1,27 +1,44 @@
-# StartTag
+## StartTag
+Repo to reprodce bug in Angular 9 when building with '--localize'
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.2.
+[GitHub Issue](https://github.com/angular/angular/issues/35420)
 
-## Development server
+### Bug
+Build exists with error message `Cannot read property 'startTag' of null` and aborts. Fails to create index.html.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## To reproduce
+```bash
+ng build --localize
+```
+## Cause
+In index.html the link-tag is placed outside the html-tag. If the link-tag is moved to the correct place, the error goes away.
 
-## Code scaffolding
+## Version info
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+Angular CLI: 9.0.2
+Node: 12.10.0
+OS: linux x64
 
-## Build
+Angular: 9.0.1
+... animations, common, compiler, compiler-cli, core, forms
+... language-service, localize, platform-browser
+... platform-browser-dynamic, router
+Ivy Workspace: Yes
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Package                           Version
+-----------------------------------------------------------
+@angular-devkit/architect         0.900.2
+@angular-devkit/build-angular     0.900.2
+@angular-devkit/build-optimizer   0.900.2
+@angular-devkit/build-webpack     0.900.2
+@angular-devkit/core              9.0.2
+@angular-devkit/schematics        9.0.2
+@angular/cli                      9.0.2
+@ngtools/webpack                  9.0.2
+@schematics/angular               9.0.2
+@schematics/update                0.900.2
+rxjs                              6.5.4
+typescript                        3.7.5
+webpack                           4.41.2
+```
